@@ -55,6 +55,7 @@ gem 'devise-jwt'
 # Gemfile
 gem 'nokogiri'
 gem 'httparty'
+gem "rubocop"
 
 
 
