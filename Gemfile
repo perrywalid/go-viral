@@ -56,6 +56,7 @@ gem 'devise-jwt'
 gem 'nokogiri'
 gem 'httparty'
 gem "rubocop"
+gem 'mini_magick'
 
 
 

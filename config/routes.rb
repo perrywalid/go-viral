@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'posts/create', to: 'posts#create'
   devise_for :users, defaults: { format: :json }, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
