@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :user_statistics
+  has_many :tweets
+  has_many :instagram_posts
 
   validates :facebook_handle, :instagram_handle, :twitter_handle, allow_blank: true, uniqueness: true
 end
