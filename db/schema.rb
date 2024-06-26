@@ -10,8 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_22_124905) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_181736) do
   create_table "jwt_denylists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string "post_id"
+    t.integer "user_id"
+    t.string "tweet_id"
+    t.datetime "creation_date"
+    t.text "text"
+    t.string "language"
+    t.integer "favorite_count"
+    t.integer "retweet_count"
+    t.integer "reply_count"
+    t.integer "quote_count"
+    t.integer "views"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
