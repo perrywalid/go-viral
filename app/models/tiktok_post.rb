@@ -1,4 +1,4 @@
-class InstagramPost < ApplicationRecord
+class TiktokPost < ApplicationRecord
   belongs_to :user
 
   def day_of_week
