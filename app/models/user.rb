@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :tiktok_posts
   has_many :calendar_events
   has_many :followers_histories, dependent: :destroy
+  belongs_to :category
 
   validates :facebook_handle, :instagram_handle, :twitter_handle, allow_blank: true, uniqueness: true
 
@@ -18,8 +19,33 @@ class User < ApplicationRecord
   after_save :fetch_tiktok_details, if: :saved_change_to_tiktok_handle?
 
   def followers_at(date, platform)
-    history = followers_histories.where('recorded_at <= ? AND platform = ?', date, platform).order(recorded_at: :desc).first
+    history = followers_histories.where('recorded_at <= ? AND platform = ?', date,
+                                        platform).order(recorded_at: :desc).first
     history ? history.count : 0
+  end
+
+  def total_engagement
+    twitter_follower_count.to_i + instagram_follower_count.to_i + tiktok_follower_count.to_i + twitter_like_count.to_i + instagram_like_count.to_i + tiktok_like_count.to_i
+  end
+
+  def total_followers
+    twitter_follower_count.to_i + instagram_follower_count.to_i + tiktok_follower_count.to_i
+  end
+
+  def total_likes
+    twitter_like_count.to_i + instagram_like_count.to_i + tiktok_like_count.to_i
+  end
+
+  def twitter_like_count
+    tweets.sum(:favorite_count)
+  end
+
+  def instagram_like_count
+    instagram_posts.sum(:like_count)
+  end
+
+  def tiktok_like_count
+    tiktok_posts.sum(:like_count)
   end
 
   def fetch_twitter_details

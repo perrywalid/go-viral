@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_30_024318) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_105146) do
   create_table "calendar_events", force: :cascade do |t|
     t.string "text"
     t.text "description"
@@ -18,6 +18,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_024318) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "followers_histories", force: :cascade do |t|
@@ -128,6 +135,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_024318) do
     t.integer "tiktok_video_count"
     t.text "tiktok_signature"
     t.boolean "tiktok_is_verified"
+    t.integer "category_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
