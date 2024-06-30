@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_29_185133) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_024318) do
   create_table "calendar_events", force: :cascade do |t|
     t.string "text"
     t.text "description"
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_185133) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "followers_histories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "count"
+    t.datetime "recorded_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "platform"
+    t.index ["user_id"], name: "index_followers_histories_on_user_id"
   end
 
   create_table "instagram_posts", force: :cascade do |t|
@@ -98,9 +108,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_29_185133) do
     t.string "instagram_handle"
     t.string "twitter_handle"
     t.string "tiktok_handle"
+    t.string "twitter_name"
+    t.integer "twitter_follower_count"
+    t.integer "twitter_following_count"
+    t.integer "twitter_favourites_count"
+    t.boolean "twitter_is_verified"
+    t.text "twitter_description"
+    t.integer "twitter_number_of_tweets"
+    t.string "instagram_name"
+    t.integer "instagram_follower_count"
+    t.integer "instagram_following_count"
+    t.text "instagram_biography"
+    t.integer "instagram_media_count"
+    t.boolean "instagram_is_verified"
+    t.string "tiktok_nickname"
+    t.integer "tiktok_follower_count"
+    t.integer "tiktok_following_count"
+    t.integer "tiktok_heart_count"
+    t.integer "tiktok_video_count"
+    t.text "tiktok_signature"
+    t.boolean "tiktok_is_verified"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "followers_histories", "users"
   add_foreign_key "user_statistics", "users"
 end
