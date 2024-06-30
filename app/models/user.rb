@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :tiktok_posts
   has_many :calendar_events
   has_many :followers_histories, dependent: :destroy
-  belongs_to :category
+  belongs_to :category, optional: true
 
   validates :facebook_handle, :instagram_handle, :twitter_handle, allow_blank: true, uniqueness: true
 
