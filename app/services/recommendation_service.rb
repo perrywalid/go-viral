@@ -7,7 +7,11 @@ class RecommendationService
 
   def recommend_users
     users = User.where.not(id: @user.id)
-    users = users.where(category: @user.category) if @same_category
+    if @same_category
+      users = users.where(category: @user.category) 
+    else
+      users = users.where.not(category: @user.category)
+    end
     recommendations = users.map do |other_user|
       { user: other_user, similarity_score: calculate_similarity(@user, other_user) }
     end
