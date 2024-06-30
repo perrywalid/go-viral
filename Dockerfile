@@ -4,6 +4,10 @@
 ARG RUBY_VERSION=2.7.2
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
+
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y build-essential libsqlite3-dev nodejs yarn imagemagick
+
 # Rails app lives here
 WORKDIR /rails
 
