@@ -38,7 +38,7 @@ class SocialMediaPoster
   end
 
   def post_to_instagram(text, image)
-    uri = URI("#{INSTAGRAM_WEBHOOK_URL}?title=#{URI.encode(text)}")
+    uri = URI("#{INSTAGRAM_WEBHOOK_URL}?title=#{URI.encode_www_form_component(text)}")
     request = Net::HTTP::Post.new(uri)
     form_data = [['file', image.to_blob, { filename: 'image.jpg', content_type: 'image/jpeg' }]]
     request.set_form(form_data, 'multipart/form-data')
@@ -49,7 +49,7 @@ class SocialMediaPoster
   end
 
   def post_to_facebook_and_x(text, image)
-    uri = URI("#{FACEBOOK_X_WEBHOOK_URL}?title=#{URI.encode(text)}")
+    uri = URI("#{FACEBOOK_X_WEBHOOK_URL}?title=#{URI.encode_www_form_component(text)}")
     request = Net::HTTP::Post.new(uri)
     form_data = [['file', image.to_blob, { filename: 'image.jpg', content_type: 'image/jpeg' }]]
     request.set_form(form_data, 'multipart/form-data')

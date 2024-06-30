@@ -2,7 +2,7 @@
 class PostTimingService
   def initialize(user, platform)
     @user = user
-    @platform = platform.capitalize.constantize
+    @platform = platform.constantize
   end
 
   def total_score_by_day
@@ -39,8 +39,8 @@ class PostTimingService
                  when 'hour' then post.hour_of_day
                  end
 
-      grouped[time_key][:engagement] += post.engagement
-      grouped[time_key][:views] += post.views
+      grouped[time_key][:engagement] += post.engagement ? post.engagement : 0
+      grouped[time_key][:views] += post.views ? post.views : 0
     end
 
     grouped

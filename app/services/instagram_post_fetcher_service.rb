@@ -65,7 +65,7 @@ class InstagramPostFetcherService
   end
 
   def fetch_continuation_posts(pagination_token)
-    url = URI("https://#{API_HOST}/v1.2/posts?username_or_id_or_url=#{@user.instagram_handle}&pagination_token=#{URI.encode(pagination_token)}")
+    url = URI("https://#{API_HOST}/v1.2/posts?username_or_id_or_url=#{@user.instagram_handle}&pagination_token=#{URI.encode_www_form_component(pagination_token)}")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true

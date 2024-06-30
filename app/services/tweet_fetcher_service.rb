@@ -65,7 +65,7 @@ class TweetFetcherService
   end
 
   def fetch_continuation_tweets(continuation_token)
-    url = URI("https://#{API_HOST}/user/tweets/continuation?username=#{@user.twitter_handle}&limit=20&continuation_token=#{URI.encode(continuation_token)}&include_replies=false")
+    url = URI("https://#{API_HOST}/user/tweets/continuation?username=#{@user.twitter_handle}&limit=20&continuation_token=#{URI.encode_www_form_component(continuation_token)}&include_replies=false")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
