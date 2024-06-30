@@ -59,4 +59,10 @@ class User < ApplicationRecord
   def fetch_tiktok_details
     FetchTiktokDetailsJob.perform_later(id)
   end
+
+  def fetch_posts
+    InstagramPostFetcherService.new(self).fetch_and_store_posts
+    TweetFetcherService.new(self).fetch_and_store_tweets
+    TiktokPostFetcherService.new(self).fetch_and_store_posts
+  end
 end
