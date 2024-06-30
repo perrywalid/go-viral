@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :tweets
   has_many :instagram_posts
   has_many :tiktok_posts
+  has_many :calendar_events
 
   validates :facebook_handle, :instagram_handle, :twitter_handle, allow_blank: true, uniqueness: true
 end
+
+

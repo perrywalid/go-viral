@@ -8,4 +8,16 @@ class TiktokPost < ApplicationRecord
   def hour_of_day
     creation_date.strftime('%H').to_i
   end
+
+  def engagement
+    like_count + comment_count + share_count
+  end
+
+  def views
+    view_count
+  end
+
+  def total_score
+    engagement + views
+  end
 end
