@@ -58,6 +58,8 @@ gem 'httparty'
 gem "rubocop"
 gem 'mini_magick'
 
+# Gemfile
+gem 'rack-cors', require: 'rack/cors'
 
 
 group :development, :test do
