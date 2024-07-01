@@ -14,12 +14,13 @@ class TweetFetcherService
     fetched_tweets = []
     continuation_token = nil
 
-    while fetched_tweets.size < 1000
+    while fetched_tweets.size < 200
       if continuation_token
         response = fetch_continuation_tweets(continuation_token)
       else
         response = fetch_initial_tweets
       end
+      return if tweets.nil?
 
       tweets, continuation_token = parse_response(response)
 
@@ -41,7 +42,7 @@ class TweetFetcherService
         )
 
         fetched_tweets << tweet
-        break if fetched_tweets.size >= 100
+        break if fetched_tweets.size >= 200
       end
 
       break if continuation_token.nil?
