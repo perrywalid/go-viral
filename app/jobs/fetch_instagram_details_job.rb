@@ -27,7 +27,8 @@ class FetchInstagramDetailsJob < ApplicationJob
       instagram_following_count: details['following_count'],
       instagram_biography: details['biography'],
       instagram_media_count: details['media_count'],
-      instagram_is_verified: details['about']['is_verified']
+      instagram_is_verified: details['about']['is_verified'],
+      photo_url: details['hd_profile_pic_url_info']['url']
     )
     user.followers_histories.create!(count: details['follower_count'], platform: 'InstagramPost', recorded_at: Time.current)
   rescue StandardError => e

@@ -35,6 +35,7 @@ class UserResource < ApplicationResource
   attribute :tiktok_video_count, :integer
   attribute :tiktok_signature, :string
   attribute :tiktok_is_verified, :boolean
+  attribute :photo_url, :string
 
   has_many :user_statistics
 
