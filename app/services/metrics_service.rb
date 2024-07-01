@@ -110,6 +110,6 @@ class MetricsService
   def audience_growth_rate(platform)
     this_month_followers = @user.followers_at(@now, platform)
     last_month_followers = @user.followers_at(@start_of_last_month, platform)
-    last_month_followers.zero? ? 0 : ((this_month_followers - (last_month_followers || 100000)).to_f / last_month_followers * 100).round(2)
+    ((this_month_followers - (last_month_followers || 100_000)).to_f / last_month_followers * 100).round(2)
   end
 end
