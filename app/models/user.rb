@@ -49,15 +49,15 @@ class User < ApplicationRecord
   end
 
   def fetch_twitter_details
-    FetchTwitterDetailsJob.perform_later(id)
+    FetchTwitterDetailsJob.perform_now(id)
   end
 
   def fetch_instagram_details
-    FetchInstagramDetailsJob.perform_later(id)
+    FetchInstagramDetailsJob.perform_now(id)
   end
 
   def fetch_tiktok_details
-    FetchTiktokDetailsJob.perform_later(id)
+    FetchTiktokDetailsJob.perform_now(id)
   end
 
   def fetch_posts
