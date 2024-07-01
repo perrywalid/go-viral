@@ -64,8 +64,6 @@ class MetricsService
                      data.sum(:share_count)
                    when 'Tweet'
                      data.sum(:retweet_count) + data.sum(:quote_count)
-                   when 'InstagramPost'
-                      data.sum(:share_count)
                    else
                      0
                    end
