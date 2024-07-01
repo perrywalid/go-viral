@@ -31,7 +31,7 @@ class FetchTiktokDetailsJob < ApplicationJob
       tiktok_signature: details['signature'],
       tiktok_is_verified: details['verified']
     )
-    user.followers_histories.create!(count: stats['followerCount'], platform: 'Tiktok', recorded_at: Time.current)
+    user.followers_histories.create!(count: stats['followerCount'], platform: 'TiktokPost', recorded_at: Time.current)
   rescue StandardError => e
     Rails.logger.error "Failed to fetch TikTok details: #{e.message}"
   end

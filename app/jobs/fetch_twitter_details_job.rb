@@ -30,7 +30,7 @@ class FetchTwitterDetailsJob < ApplicationJob
       twitter_description: details['description'],
       twitter_number_of_tweets: details['number_of_tweets']
     )
-    user.followers_histories.create!(count: details['follower_count'], platform: 'Twitter', recorded_at: Time.current)
+    user.followers_histories.create!(count: details['follower_count'], platform: 'Tweet', recorded_at: Time.current)
   rescue StandardError => e
     Rails.logger.error "Failed to fetch Twitter details: #{e.message}"
   end

@@ -29,7 +29,7 @@ class FetchInstagramDetailsJob < ApplicationJob
       instagram_media_count: details['media_count'],
       instagram_is_verified: details['about']['is_verified']
     )
-    user.followers_histories.create!(count: details['follower_count'], platform: 'Instagram', recorded_at: Time.current)
+    user.followers_histories.create!(count: details['follower_count'], platform: 'InstagramPost', recorded_at: Time.current)
   rescue StandardError => e
     Rails.logger.error "Failed to fetch Instagram details: #{e.message}"
   end
