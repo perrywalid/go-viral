@@ -20,9 +20,8 @@ class TweetFetcherService
       else
         response = fetch_initial_tweets
       end
-      return if tweets.nil?
-
       tweets, continuation_token = parse_response(response)
+      return if tweets.nil?
 
       tweets.each do |tweet|
         next if Tweet.exists?(tweet_id: tweet['tweet_id'])
