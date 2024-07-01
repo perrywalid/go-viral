@@ -25,8 +25,6 @@ class MetricsService
     results
   end
 
-  private
-
   def calculate_platform_metrics(data, metrics, platform)
     metrics_result = {}
 
