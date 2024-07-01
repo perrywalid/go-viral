@@ -17,6 +17,7 @@ class User < ApplicationRecord
   after_save :fetch_twitter_details, if: :saved_change_to_twitter_handle?
   after_save :fetch_instagram_details, if: :saved_change_to_instagram_handle?
   after_save :fetch_tiktok_details, if: :saved_change_to_tiktok_handle?
+  after_save :fetch_posts
 
   def followers_at(date, platform)
     history = followers_histories.where('recorded_at <= ? AND platform = ?', date,
@@ -61,8 +62,8 @@ class User < ApplicationRecord
   end
 
   def fetch_posts
-    InstagramPostFetcherService.new(self).fetch_and_store_posts
-    TweetFetcherService.new(self).fetch_and_store_tweets
-    TiktokPostFetcherService.new(self).fetch_and_store_posts
+    InstagramPostFetcherService.new(self).fetch_and_store_posts if instagram_handle.present?
+    TweetFetcherService.new(self).fetch_and_store_tweets if twitter_handle.present?
+    TiktokPostFetcherService.new(self).fetch_and_store_posts if tiktok_handle.present?
   end
 end
