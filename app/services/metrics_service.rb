@@ -3,7 +3,7 @@ class MetricsService
   PLATFORM_METRICS = {
     TiktokPost: %i[view_count like_count comment_count share_count],
     Tweet: %i[views favorite_count retweet_count reply_count quote_count],
-    InstagramPost: %i[view_count like_count comment_count]
+    InstagramPost: %i[like_count comment_count]
   }.freeze
 
   def initialize(user)
@@ -64,6 +64,8 @@ class MetricsService
                      data.sum(:share_count)
                    when 'Tweet'
                      data.sum(:retweet_count) + data.sum(:quote_count)
+                   when 'InstagramPost'
+                      data.sum(:share_count)
                    else
                      0
                    end
