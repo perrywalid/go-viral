@@ -17,7 +17,6 @@ class User < ApplicationRecord
   after_save :fetch_twitter_details, if: :saved_change_to_twitter_handle?
   after_save :fetch_instagram_details, if: :saved_change_to_instagram_handle?
   after_save :fetch_tiktok_details, if: :saved_change_to_tiktok_handle?
-  after_save :fetch_posts
 
   def followers_at(date, platform)
     history = followers_histories.where('recorded_at <= ? AND platform = ?', date,
