@@ -1,14 +1,25 @@
 version: '3.8'
-
 services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: goviral_development
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+
   web:
     build: .
-    command: bundle exec rails server -b 0.0.0.0 -p 3000
+    command: bundle exec rails server -b 0.0.0.0
     volumes:
       - .:/app
     ports:
       - "3000:3000"
+    depends_on:
+      - db
     environment:
-      RAILS_ENV: development
-      NODE_ENV: development
-      BUNDLE_PATH: /bundle
+      DATABASE_URL: postgres://root:password@db:5432/goviral_development
+
+volumes:
+  postgres-data:

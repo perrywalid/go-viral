@@ -3,6 +3,9 @@ development:
   database: goviral_development
   pool: 5
   timeout: 5000
+  username: root
+  password: password
+  host: db
 test:
   adapter: postgresql
   database: goviral_test
